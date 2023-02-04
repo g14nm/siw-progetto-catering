@@ -6,6 +6,6 @@ import it.uniroma3.siw.siwprogettocatering.model.Piatto;
 
 public interface PiattoRepository extends CrudRepository<Piatto, Long> {
 
-	
+	public boolean existsByNome(String nome);
 	
 }

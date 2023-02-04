@@ -26,6 +26,10 @@ public class PiattoService {
 		return this.piattoRepository.findById(id).get();
 	}
 	
+	public boolean existsByNome(String nome) {
+		return this.piattoRepository.existsByNome(nome);
+	}
+	
 	public void deleteById(Long id) {
 		this.piattoRepository.deleteById(id);
 	}

@@ -1,5 +1,6 @@
 package it.uniroma3.siw.siwprogettocatering.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ public class Ingrediente {
 	private Long id;
 	
 	@NotBlank
+	@Column(unique = true)
 	private String nome;
 	
 	@NotBlank
@@ -35,7 +37,7 @@ public class Ingrediente {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.trim();
 	}
 
 	public String getOrigine() {
@@ -43,7 +45,7 @@ public class Ingrediente {
 	}
 
 	public void setOrigine(String origine) {
-		this.origine = origine;
+		this.origine = origine.trim();
 	}
 
 	public String getDescrizione() {
@@ -51,7 +53,7 @@ public class Ingrediente {
 	}
 
 	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+		this.descrizione = descrizione.trim();
 	}
 	
 	@Override

@@ -26,6 +26,10 @@ public class IngredienteService {
 		return this.ingredienteRepository.findById(id).get();
 	}
 	
+	public boolean existsByNome(String nome) {
+		return this.ingredienteRepository.existsByNome(nome);
+	}
+	
 	public void deleteById(Long id) {
 		this.ingredienteRepository.deleteById(id);
 	}

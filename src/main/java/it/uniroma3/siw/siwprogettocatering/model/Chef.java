@@ -41,7 +41,7 @@ public class Chef {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.trim();
 	}
 
 	public String getCognome() {
@@ -49,7 +49,7 @@ public class Chef {
 	}
 
 	public void setCognome(String cognome) {
-		this.cognome = cognome;
+		this.cognome = cognome.trim();
 	}
 
 	public String getNazionalità() {
@@ -57,7 +57,7 @@ public class Chef {
 	}
 
 	public void setNazionalità(String nazionalità) {
-		this.nazionalità = nazionalità;
+		this.nazionalità = nazionalità.trim();
 	}
 
 	public Set<Buffet> getBuffet() {

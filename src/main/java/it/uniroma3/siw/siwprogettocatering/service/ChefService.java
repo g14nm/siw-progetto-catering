@@ -26,6 +26,10 @@ public class ChefService {
 		return this.chefRepository.findById(id).get();
 	}
 	
+	public boolean existsByNomeAndCognome(String nome, String cognome) {
+		return this.chefRepository.existsByNomeAndCognome(nome, cognome);
+	}
+	
 	public void deleteById(Long id) {
 		this.chefRepository.deleteById(id);
 	}	

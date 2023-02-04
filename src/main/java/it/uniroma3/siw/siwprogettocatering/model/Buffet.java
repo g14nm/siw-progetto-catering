@@ -2,6 +2,7 @@ package it.uniroma3.siw.siwprogettocatering.model;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Buffet {
 	private Long id;
 	
 	@NotBlank
+	@Column(unique = true)
 	private String nome;
 	
 	private String descrizione;
@@ -37,7 +39,7 @@ public class Buffet {
 	}
 
 	public String getNome() {
-		return this.nome;
+		return this.nome.trim();
 	}
 
 	public void setNome(String nome) {
@@ -45,7 +47,7 @@ public class Buffet {
 	}
 
 	public String getDescrizione() {
-		return this.descrizione;
+		return this.descrizione.trim();
 	}
 
 	public void setDescrizione(String descrizione) {
