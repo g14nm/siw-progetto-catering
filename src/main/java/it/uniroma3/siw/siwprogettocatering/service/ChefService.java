@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.uniroma3.siw.siwprogettocatering.model.Chef;
 import it.uniroma3.siw.siwprogettocatering.repository.ChefRepository;
@@ -30,7 +31,10 @@ public class ChefService {
 		return this.chefRepository.existsByNomeAndCognome(nome, cognome);
 	}
 	
+	@Transactional
 	public void deleteById(Long id) {
+		Chef chef = this.findById(id);
+		chef.removeFromBuffets();
 		this.chefRepository.deleteById(id);
 	}	
 	

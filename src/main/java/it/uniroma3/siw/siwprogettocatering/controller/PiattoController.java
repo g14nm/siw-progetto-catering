@@ -13,7 +13,7 @@ public class PiattoController {
 	@Autowired
 	private PiattoService piattoService;
 	
-	@GetMapping
+	@GetMapping("/piatti")
 	public String getPiatti(Model model) {
 		model.addAttribute("piatti", this.piattoService.findAll());
 		return "piatti/piatti";

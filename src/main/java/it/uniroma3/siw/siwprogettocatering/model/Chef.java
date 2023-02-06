@@ -23,10 +23,10 @@ public class Chef {
 	private String cognome;
 	
 	@NotBlank
-	private String nazionalità;
+	private String nazionalita;
 	
 	@OneToMany(mappedBy = "chef")
-	private Set<Buffet> buffet;
+	private Set<Buffet> buffets;
 
 	public Long getId() {
 		return this.id;
@@ -52,24 +52,33 @@ public class Chef {
 		this.cognome = cognome.trim();
 	}
 
-	public String getNazionalità() {
-		return this.nazionalità;
+	public String getNazionalita() {
+		return this.nazionalita;
 	}
 
-	public void setNazionalità(String nazionalità) {
-		this.nazionalità = nazionalità.trim();
+	public void setNazionalita(String nazionalita) {
+		this.nazionalita = nazionalita.trim();
 	}
 
-	public Set<Buffet> getBuffet() {
-		return this.buffet;
+	public Set<Buffet> getBuffets() {
+		return this.buffets;
 	}
 
-	public void setBuffet(Set<Buffet> buffet) {
-		this.buffet = buffet;
+	public void setBuffets(Set<Buffet> buffets) {
+		this.buffets = buffets;
 	}
 	
 	public void addBuffet(Buffet buffet) {
-		this.buffet.add(buffet);
+		this.buffets.add(buffet);
+	}
+	
+	public void removeBuffet(Buffet buffet) {
+		this.buffets.remove(buffet);
+	}
+	
+	public void removeFromBuffets() {
+		for(Buffet buffet : this.buffets)
+			buffet.removeChef();
 	}
 	
 	@Override

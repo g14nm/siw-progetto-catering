@@ -1,10 +1,12 @@
 package it.uniroma3.siw.siwprogettocatering.model;
 
-import javax.persistence.Column;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -15,14 +17,15 @@ public class Ingrediente {
 	private Long id;
 	
 	@NotBlank
-	@Column(unique = true)
 	private String nome;
 	
 	@NotBlank
 	private String origine;
 	
-	@NotBlank
 	private String descrizione;
+	
+	@ManyToMany
+	private Set<Piatto> piatti;
 
 	public Long getId() {
 		return id;
@@ -56,16 +59,37 @@ public class Ingrediente {
 		this.descrizione = descrizione.trim();
 	}
 	
+	public Set<Piatto> getPiatti() {
+		return this.piatti;
+	}
+	
+	public void setPiatti(Set<Piatto> piatti) {
+		this.piatti = piatti;
+	}
+	
+	public void addPiatto(Piatto piatto) {
+		this.piatti.add(piatto);
+	}
+	
+	public void removePiatto(Piatto piatto) {
+		this.piatti.remove(piatto);
+	}
+	
+	public void removeFromPiatti() {
+		for(Piatto piatto : this.piatti)
+			piatto.removeIngrediente(this);
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if(o == null || this.getClass() != o.getClass()) return false;
 		Ingrediente ingrediente = (Ingrediente)o;
-		return this.nome.equals(ingrediente.getNome());
+		return this.nome.equals(ingrediente.getNome()) && this.origine.equals(ingrediente.getOrigine());
 	}
 	
 	@Override
 	public int hashCode() {
-		return this.nome.hashCode();
+		return this.nome.hashCode() + this.origine.hashCode();
 	}
 	
 }

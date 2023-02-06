@@ -23,7 +23,7 @@ public class ChefValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Chef chef = (Chef)target;
 		
-		if(this.chefService.existsByNomeAndCognome(chef.getNome().trim(), chef.getCognome().trim()))
+		if(this.chefService.existsByNomeAndCognome(chef.getNome(), chef.getCognome()))
 			errors.rejectValue("nome", "duplicate");
 	}
 

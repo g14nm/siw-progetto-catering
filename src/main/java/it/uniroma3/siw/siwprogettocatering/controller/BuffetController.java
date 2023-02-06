@@ -13,7 +13,7 @@ public class BuffetController {
 	@Autowired
 	private BuffetService buffetService;
 	
-	@GetMapping
+	@GetMapping("/buffets")
 	public String getBuffets(Model model) {
 		model.addAttribute("buffets", this.buffetService.findAll());
 		return "buffets/buffets";

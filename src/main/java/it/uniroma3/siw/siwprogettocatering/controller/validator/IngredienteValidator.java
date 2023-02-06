@@ -23,7 +23,7 @@ public class IngredienteValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Ingrediente ingrediente = (Ingrediente)target;
 		
-		if(this.ingredienteService.existsByNome(ingrediente.getNome().trim()))
+		if(this.ingredienteService.existsByNomeAndOrigine(ingrediente.getNome(), ingrediente.getOrigine()))
 			errors.rejectValue("nome", "duplicate");
 	}
 

@@ -24,7 +24,7 @@ public class Buffet {
 	
 	private String descrizione;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "buffets")
 	private Set<Piatto> piatti;
 	
 	@ManyToOne
@@ -39,19 +39,19 @@ public class Buffet {
 	}
 
 	public String getNome() {
-		return this.nome.trim();
+		return this.nome;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.nome = nome.trim();
 	}
 
 	public String getDescrizione() {
-		return this.descrizione.trim();
+		return this.descrizione;
 	}
 
 	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+		this.descrizione = descrizione.trim();
 	}
 
 	public Set<Piatto> getPiatti() {
@@ -70,8 +70,25 @@ public class Buffet {
 		this.chef = chef;
 	}
 	
-	public void addPiatto(Piatto piatto) {
-		this.piatti.add(piatto);
+	public void removePiatto(Piatto piatto) {
+		this.piatti.remove(piatto);
+	}
+	
+	public void removeFromPiatti() {
+		for(Piatto piatto : this.piatti)
+			piatto.removeBuffet(this);
+	}
+	
+	public void removeChef() {
+		this.chef = null;
+	}
+	
+	public void addToChef() {
+		this.chef.addBuffet(this);
+	}
+	
+	public void removeFromChef() {
+		this.chef.removeBuffet(this);
 	}
 
 	@Override

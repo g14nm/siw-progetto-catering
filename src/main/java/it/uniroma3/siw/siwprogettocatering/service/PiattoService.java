@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import it.uniroma3.siw.siwprogettocatering.model.Ingrediente;
 import it.uniroma3.siw.siwprogettocatering.model.Piatto;
 import it.uniroma3.siw.siwprogettocatering.repository.PiattoRepository;
 
@@ -14,7 +16,10 @@ public class PiattoService {
 	@Autowired
 	private PiattoRepository piattoRepository;
 	
+	@Transactional
 	public Piatto save(Piatto piatto) {
+		for(Ingrediente ingrediente : piatto.getIngredienti())
+			ingrediente.addPiatto(piatto);
 		return this.piattoRepository.save(piatto);
 	}
 	
@@ -30,7 +35,11 @@ public class PiattoService {
 		return this.piattoRepository.existsByNome(nome);
 	}
 	
+	@Transactional
 	public void deleteById(Long id) {
+		Piatto piatto = this.findById(id);
+		piatto.removeFromBuffets();
+		piatto.removeFromIngredienti();
 		this.piattoRepository.deleteById(id);
 	}
 	

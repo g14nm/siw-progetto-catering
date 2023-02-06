@@ -13,7 +13,7 @@ public class ChefController {
 	@Autowired
 	private ChefService chefService;
 	
-	@GetMapping
+	@GetMapping("/chefs")
 	public String getChefs(Model model) {
 		model.addAttribute("chefs", this.chefService.findAll());
 		return "chefs/chefs";

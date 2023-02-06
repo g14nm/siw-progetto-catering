@@ -23,7 +23,7 @@ public class PiattoValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Piatto piatto = (Piatto)target;
 		
-		if(this.piattoService.existsByNome(piatto.getNome().trim()))
+		if(this.piattoService.existsByNome(piatto.getNome()))
 			errors.rejectValue("nome", "duplicate");
 	}
 

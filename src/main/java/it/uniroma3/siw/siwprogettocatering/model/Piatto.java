@@ -24,9 +24,12 @@ public class Piatto {
 	@NotBlank
 	private String descrizione;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "piatti")
 	private Set<Ingrediente> ingredienti;
-
+	
+	@ManyToMany
+	private Set<Buffet> buffets;
+	
 	public Long getId() {
 		return this.id;
 	}
@@ -59,8 +62,34 @@ public class Piatto {
 		this.ingredienti = ingredienti;
 	}
 	
-	public void addIngrediente(Ingrediente ingrediente) {
-		this.ingredienti.add(ingrediente);
+	public Set<Buffet> getBuffets() {
+		return this.buffets;
+	}
+	
+	public void setBuffets(Set<Buffet> buffets) {
+		this.buffets = buffets;
+	}
+	
+	public void removeIngrediente(Ingrediente ingrediente) {
+		this.ingredienti.remove(ingrediente);
+	}
+	
+	public void addBuffet(Buffet buffet) {
+		this.buffets.add(buffet);
+	}
+	
+	public void removeBuffet(Buffet buffet) {
+		this.buffets.remove(buffet);
+	}
+	
+	public void removeFromIngredienti() {
+		for(Ingrediente ingrediente : this.ingredienti)
+			ingrediente.removePiatto(this);
+	}
+	
+	public void removeFromBuffets() {
+		for(Buffet buffet : this.buffets)
+			buffet.removePiatto(this);
 	}
 	
 	@Override
