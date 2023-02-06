@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Ingredienti')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<section th:if="${#lists.isEmpty(ingredienti)}">
+		<h4>Nessun ingrediente presente</h4>
+	</section>
+	<section th:unless="${#lists.isEmpty(ingredienti)}">
+		<h4>Elenco ingrediente</h4>
+		<table>
+			<tr>
+				<th>NOME</th>
+				<th>ORIGINE</th>
+				<th>DESCRIZIONE</th>
+			</tr>
+			<tr th:each="ingrediente : ${ingredienti}">
+				<td th:text="${ingrediente.nome}">Nome</td>
+				<td th:text="${ingrediente.origine}">Origine</td>
+				<td th:text="${ingrediente.descrizione}">Descrizione</td>
+				<td><a th:href="@{'/admin/edit/ingrediente/' + ${ingrediente.id}}">Modifica</a></td>
+				<td><a th:href="@{'/admin/delete/ingrediente/' + ${ingrediente.id}}">Rimuovi</a></td>
+			</tr>
+		</table>
+	</section>
+	<section>
+		<a th:href="@{/admin/ingredienteForm}">Aggiungi ingrediente</a>
+	</section>
+</body>
+</html>

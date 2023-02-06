@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Edit Piatto')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<form th:action="@{'/admin/edit/piatto/' + ${piatto.id}}" method="POST" th:object="${piatto}">
+		<table>
+			<tr>
+				<td>Nome: </td>
+				<td><input th:field="*{nome}" type="text" required /></td>
+				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></td>
+			</tr>		
+			<tr>
+				<td>Descrizione: </td>
+				<td><input th:field="*{descrizione}" type="text" required /></td>
+				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" th:style="'color:red'"></td>
+			</tr>
+			<tr>
+				<td>Ingrediente: </td>
+				<td>
+					<label for="ingrediente-select"></label>
+						<select th:field="*{ingredienti}" id="ingrediente-select" multiple required>
+						    <option value="">--Seleziona un ingrediente--</option>
+						    <option th:each="ingrediente : ${ingredienti}" th:value="${ingrediente.id}" th:text="${ingrediente.nome}">Ingrediente</option>
+						</select>	
+				</td>
+			</tr>
+		</table>
+		<div>
+				<span><button type="submit">Conferma</button></span>
+				<span><a th:href="@{/admin/piatti}"><button type="button">Annulla</button></a></span>
+		</div>
+	</form>
+</body>
+</html>

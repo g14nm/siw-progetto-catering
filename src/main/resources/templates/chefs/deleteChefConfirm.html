@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Confirm deletion of chef')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<div>
+		<h4 th:text="@{'Confermi rimozione di chef: ' + ${chef.nome} + ' ' + ${chef.cognome} + '?'}">Conferma rimozione di chef</h4>
+		<h4 th:if="${not #sets.isEmpty(chef.buffets)}" th:style="'color:red'">Lo chef ha dei buffet associati. Assicurarsi di modificare lo chef nei buffet dopo la rimozione</h4>
+	</div>
+	<form th:action="@{'/admin/delete/chef/' + ${chef.id}}" method="POST">
+		<section>
+			<h5>Dati dello chef: </h5>
+			<ul>
+				<li th:text="'Nome: ' + ${chef.nome}">Nome</li>
+				<li th:text="'Cognome: ' + ${chef.cognome}">Cognome</li>
+				<li th:text="'Nazionalità: ' + ${chef.nazionalita}">Nazionalita</li>
+			</ul>		
+		</section>
+		<div>
+				<span><button type="submit">Conferma</button></span>
+				<span><a th:href="@{/admin/chefs}"><button type="button">Annulla</button></a></span>
+		</div>
+	</form>
+</body>
+</html>

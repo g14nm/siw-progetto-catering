@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Chef')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<section th:if="${#lists.isEmpty(chefs)}">
+		<h4>Nessuno chef presente</h4>
+	</section>
+	<section th:unless="${#lists.isEmpty(chefs)}">
+		<h4>Elenco chef</h4>
+		<table>
+			<tr>
+				<th>NOME</th>
+				<th>COGNOME</th>
+				<th>NAZIONALITA'</th>
+			</tr>
+			<tr th:each="chef : ${chefs}">
+				<td th:text="${chef.nome}">Nome</td>
+				<td th:text="${chef.cognome}">Cognome</td>
+				<td th:text="${chef.nazionalita}">Nazionalita</td>
+				<td><a th:href="@{'/admin/edit/chef/' + ${chef.id}}">Modifica</a></td>
+				<td><a th:href="@{'/admin/delete/chef/' + ${chef.id}}">Rimuovi</a></td>
+			</tr>
+		</table>
+	</section>
+	<section>
+		<a th:href="@{/admin/chefForm}">Aggiungi chef</a>
+	</section>
+</body>
+</html>

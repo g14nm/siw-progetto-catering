@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Confirm deletion of buffet')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<div>
+		<h4 th:text="@{'Confermi rimozione di buffet: ' + ${buffet.id} + '?'}">Conferma rimozione di buffet</h4>
+	</div>
+	<form th:action="@{'/admin/delete/buffet/' + ${buffet.id}}" method="POST">
+		<section>
+			<h5>Dati del buffet: </h5>
+			<ul>
+				<li th:text="'Nome: ' + ${buffet.nome}">Nome</li>
+				<li th:text="'Descrizione: ' + ${buffet.descrizione}">Descrizione</li>
+				<li th:text="'Chef: ' + ${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}">Chef</li>
+				<ul>Piatti: 
+					<li th:each="piatto : *{buffet.piatti}" th:text="${piatto.nome}">Piatto</li>
+				</ul>
+			</ul>		
+		</section>
+		<div>
+				<span><button type="submit">Conferma</button></span>
+				<span><a th:href="@{/admin/buffets}"><button type="button">Annulla</button></a></span>
+		</div>
+	</form>
+</body>
+</html>

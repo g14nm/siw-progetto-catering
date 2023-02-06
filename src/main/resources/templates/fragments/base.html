@@ -1,13 +1,22 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="headerfiles(title)">
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link th:href="@{/css/my-style.css}" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<title th:text="${title}"></title>
 </head>
 <body>
 	<header th:fragment="intestazione">
-		<h1>Siw - Spring Very Simple Demo</h1>
+		<div>
+			<div>
+				<a th:href="@{/login}">Login</a>
+   			</div>
+			<div>
+				<a th:href="@{/register}">Registrati</a>
+   			</div>
+    	</div>
 	</header>
 
 	<p>Go to the next page to see fragments in action</p>

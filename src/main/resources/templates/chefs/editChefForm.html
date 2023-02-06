@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Edit Chef')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<form th:action="@{'/admin/edit/chef/' + ${chef.id}}" method="POST" th:object="${chef}">
+		<table>
+			<tr>
+				<td>Nome: </td>
+				<td><input th:field="*{nome}" type="text" required /></td>
+				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></td>
+			</tr>		
+			<tr>
+				<td>Cognome: </td>
+				<td><input th:field="*{cognome}" type="text" required /></td>
+				<td th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" th:style="'color:red'"></td>
+			</tr>
+			<tr>
+				<td>Nazionalità: </td>
+				<td><input th:field="*{nazionalita}" type="text" required /></td>
+				<td th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}" th:style="'color:red'"></td>
+			</tr>
+		</table>
+		<div>
+				<span><button type="submit">Conferma</button></span>
+				<span><a th:href="@{/admin/chefs}"><button type="button">Annulla</button></a></span>
+		</div>
+	</form>
+</body>
+</html>

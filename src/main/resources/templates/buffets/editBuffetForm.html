@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Edit Buffet')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<form th:action="@{'/admin/edit/buffet/' + ${buffet.id}}" method="POST" th:object="${buffet}">
+		<table>
+			<tr>
+				<td>Nome: </td>
+				<td><input th:field="*{nome}" type="text" required /></td>
+				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></td>
+			</tr>		
+			<tr>
+				<td>Descrizione: </td>
+				<td><input th:field="*{descrizione}" type="text" required /></td>
+				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" th:style="'color:red'"></td>
+			</tr>
+			<tr>
+				<td>Chef: </td>
+				<td>
+					<label for="chef-select"></label>
+						<select th:field="*{chef}" id="chef-select" required>
+						    <option value="">--Seleziona un chef--</option>
+						    <option th:each="chef : ${chefs}" th:value="${chef.id}" th:text="${chef.nome} + ' ' + ${chef.cognome}">Chef</option>
+						</select>	
+				</td>
+			</tr>
+			<tr>
+				<td>Piatti: </td>
+				<td>
+					<label for="piatti-select"></label>
+						<select th:field="*{piatti}" id="piatti-select" multiple required>
+						    <option value="">--Seleziona almeno un piatto--</option>
+						    <option th:each="piatto : ${piatti}" th:value="${piatto.id}" th:text="${piatto.nome}">Piatto</option>
+						</select>	
+				</td>
+			</tr>
+		</table>
+		<div>
+				<span><button type="submit">Conferma</button></span>
+				<span><a th:href="@{/admin/buffets}"><button type="button">Annulla</button></a></span>
+		</div>
+	</form>
+</body>
+</html>

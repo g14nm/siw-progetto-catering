@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<header th:fragment="intestazione">
+		<nav>
+			<a th:href="@{/default}">Home</a>
+			<a th:href="@{/admin/buffets}">Buffet</a>
+			<a th:href="@{/admin/chefs}">Chef</a>
+			<a th:href="@{/admin/piatti}">Piatti</a>
+			<a th:href="@{/admin/ingredienti}">Ingredienti</a>
+			<a th:href="@{/logout}">Logout</a>
+		</nav>
+	</header>
+</body>
+</html>

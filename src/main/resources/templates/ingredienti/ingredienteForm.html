@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Add Ingrediente')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<form th:action="@{/admin/ingrediente}" method="POST" th:object="${ingrediente}">
+		<table>
+			<tr>
+				<td>Nome: </td>
+				<td><input th:field="*{nome}" type="text" required /></td>
+				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></td>
+			</tr>		
+			<tr>
+				<td>Origine: </td>
+				<td><input th:field="*{origine}" type="text" required /></td>
+				<td th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}" th:style="'color:red'"></td>
+			</tr>
+			<tr>
+				<td>Descrizione: </td>
+				<td><input th:field="*{descrizione}" type="text"/></td>
+				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" th:style="'color:red'"></td>
+			</tr>
+		</table>
+		<div>
+				<span><button type="submit">Aggiungi</button></span>
+				<span><a th:href="@{/admin/ingredienti}"><button type="button">Annulla</button></a></span>
+		</div>
+	</form>
+</body>
+</html>

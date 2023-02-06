@@ -4,7 +4,7 @@
 <body>
 	<header th:replace="fragments/base.html :: intestazione"></header>
 	<div>
-    	<h4 th:text="#{header.registra}">Registrazione</h4>
+    	<h4>Registrazione</h4>
 	<form th:action="@{/register}" method="POST">
     <table>
         <tr>
@@ -34,6 +34,13 @@
                        th:field="${user.cognome}"/></td>
             <td th:if="${#fields.hasErrors('user.cognome')}"
                 th:errors="${user.cognome}" th:style="'color:red'"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="text" placeholder="email" required
+                       th:field="${user.email}"/></td>
+            <td th:if="${#fields.hasErrors('user.email')}"
+                th:errors="${user.email}" th:style="'color:red'"></td>
         </tr>
         <tr>
             <td>

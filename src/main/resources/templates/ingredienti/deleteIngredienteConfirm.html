@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Confirm deletion of ingrediente')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<div>
+		<h4 th:text="@{'Confermi rimozione di ingrediente: ' + ${ingrediente.id} + '?'}">Conferma rimozione di ingrediente</h4>
+	</div>
+	<form th:action="@{'/admin/delete/ingrediente/' + ${ingrediente.id}}" method="POST">
+		<section>
+			<h5>Dati dello ingrediente: </h5>
+			<ul>
+				<li th:text="'Nome: ' + ${ingrediente.nome}">Nome</li>
+				<li th:text="'Origine: ' + ${ingrediente.origine}">Origine</li>
+				<li th:text="'Descrizione: ' + ${ingrediente.descrizione}">Descrizione</li>
+			</ul>		
+		</section>
+		<div>
+				<span><button type="submit">Conferma</button></span>
+				<span><a th:href="@{/admin/ingredienti}"><button type="button">Annulla</button></a></span>
+		</div>
+	</form>
+</body>
+</html>

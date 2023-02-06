@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Piatto')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<section th:if="${#lists.isEmpty(piatti)}">
+		<h4>Nessun piatto presente</h4>
+	</section>
+	<section th:unless="${#lists.isEmpty(piatti)}">
+		<h4>Elenco piatti</h4>
+		<table>
+			<tr>
+				<th>NOME</th>
+				<th>DESCRIZIONE</th>
+			</tr>
+			<tr th:each="piatto : ${piatti}">
+				<td th:text="${piatto.nome}">Nome</td>
+				<td th:text="${piatto.descrizione}">Descrizione</td>
+				<td><a th:href="@{'/admin/edit/piatto/' + ${piatto.id}}">Modifica</a></td>
+				<td><a th:href="@{'/admin/delete/piatto/' + ${piatto.id}}">Rimuovi</a></td>
+			</tr>
+		</table>
+	</section>
+	<section>
+		<a th:href="@{/admin/piattoForm}">Aggiungi piatto</a>
+	</section>
+</body>
+</html>

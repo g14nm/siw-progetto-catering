@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Confirm deletion of piatto')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<div>
+		<h4 th:text="@{'Confermi rimozione di piatto: ' + ${piatto.id} + '?'}">Conferma rimozione di piatto</h4>
+	</div>
+	<form th:action="@{'/admin/delete/piatto/' + ${piatto.id}}" method="POST">
+		<section>
+			<h5>Dati del piatto: </h5>
+			<ul>
+				<li th:text="'Nome: ' + ${piatto.nome}">Nome</li>
+				<li th:text="'Descrizione: ' + ${piatto.descrizione}">Descrizione</li>
+				<ul>Ingredienti: 
+					<li th:each="ingrediente : *{piatto.ingredienti}" th:text="${ingrediente.nome}">Ingrediente</li>
+				</ul>
+			</ul>		
+		</section>
+		<div>
+				<span><button type="submit">Conferma</button></span>
+				<span><a th:href="@{/admin/piatti}"><button type="button">Annulla</button></a></span>
+		</div>
+	</form>
+</body>
+</html>

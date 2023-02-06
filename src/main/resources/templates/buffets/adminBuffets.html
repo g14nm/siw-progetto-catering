@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Buffet')"> </head>
+<body>
+	<header th:replace="fragments/admin_base.html :: intestazione"></header>
+	<section th:if="${#lists.isEmpty(buffets)}">
+		<h4>Nessun buffet presente</h4>
+	</section>
+	<section th:unless="${#lists.isEmpty(buffets)}">
+		<h4>Elenco buffet</h4>
+		<table>
+			<tr>
+				<th>NOME</th>
+				<th>DESCRIZIONE</th>
+				<th>CHEF</th>
+			</tr>
+			<tr th:each="buffet : ${buffets}">
+				<td th:text="${buffet.nome}">Nome</td>
+				<td th:text="${buffet.descrizione}">Descrizione</td>
+				<td th:if="${buffet.chef}" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}">Chef</td>
+				<td th:unless="${buffet.chef}"></td>
+				<td><a th:href="@{'/admin/edit/buffet/' + ${buffet.id}}">Modifica</a></td>
+				<td><a th:href="@{'/admin/delete/buffet/' + ${buffet.id}}">Rimuovi</a></td>
+			</tr>
+		</table>
+	</section>
+	<section>
+		<a th:href="@{/admin/buffetForm}">Aggiungi buffet</a>
+	</section>
+</body>
+</html>
