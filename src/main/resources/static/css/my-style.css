@@ -1,0 +1,253 @@
+* {
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+    width: 100%;
+    
+    display: table;
+    
+    font-family: sans-serif;
+}
+
+body {
+	height: 100%;
+    width: 100%;
+    
+    display: table-cell;
+    
+    margin: 0;
+    
+    position: relative;
+}
+
+header {
+	height: 80px;
+	width: 100%;
+	
+	background-color: black;
+	color: white;
+	
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+nav a {
+	width: 45%;
+	color: white;
+	font-weight: bold;
+}
+
+footer {
+	height: 80px;
+	width: 100%;
+	
+	background-color: #EFECEC;
+	color: darkgrey;
+	
+	margin-top: 50px;
+	
+	position: absolute;
+	bottom: 0;
+}
+
+.center-form {
+	height: 580px;
+  	width: 100%;
+  	
+  	margin-top: 50px;
+  	padding-bottom: 130px;
+  	
+ 	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+@media only screen and (min-width: 740px) {
+.center-form form {
+ 	height: 100%;
+  	width: 350px;
+  	flex-shrink: 0;
+  	
+  	font-size: 2rem;
+  	
+  	box-shadow: 0 0 15px 0 rgba(0,0,0,0.2);
+  	border-radius: 5px;
+  	
+  	display: flex;
+  	flex-direction: column;
+  	justify-content: space-around;
+  	align-items: center;
+  }
+}
+
+.form-row {
+  	height: 12%;
+	width: 80%;
+}
+
+input {
+  	height: 100%;
+  	width: 100%;
+  	
+    background-color: black;
+    
+    font-size: 1rem;
+  	text-indent: 15px;
+  	color: white;
+    
+ 	border: 0;
+  	border-radius: 5px;
+}
+
+::placeholder {
+	color: darkgrey;
+}
+
+input:focus {
+	outline: none;
+	opacity: 0.7;
+}
+
+.login-button {
+  	height: 100%;
+	width: 100%;
+	
+  	background-color: darkgreen;
+  	color: white;
+  
+  	border: 0;
+  	border-radius: 5px;
+  
+  	cursor: pointer;
+  
+  	font-size: 1rem; 
+  	font-weight: bold;
+}
+
+.index-section {
+	height: 1030px;
+	width: 100%;
+	
+	margin-top: 50px;
+	padding-bottom: 130px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.index-section a {
+	height: 30%;
+	width: 70%;
+	text-decoration: none;
+}
+
+.index-section a:hover {
+	opacity: 0.7;
+}
+
+.index-row-buffets {
+	height: 100%;
+	width: 100%;
+	
+	border-radius: 20px;
+	
+	background-image: url(/images/buffet.jpg);
+	background-size: cover;
+	
+	display: flex;
+	align-items: flex-end;
+}
+
+.index-row-chefs {
+	height: 100%;
+	width: 100%;
+	
+	border-radius: 20px;
+	
+	background-image: url(/images/chefs.jpg);
+	background-size: cover;
+	
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+
+.index-row-piatti {
+	height: 100%;
+	width: 100%;
+	
+	border-radius: 20px;
+	
+	background-image: url(/images/piatti.jpg);
+	background-size: cover;
+	
+	display: flex;
+	align-items: flex-end;
+}
+
+.index-row-title {
+	font-size: 3rem;
+	font-weight: bold;
+	
+	background-color: darkgreen;
+	color: white;
+	
+	margin: 20px;
+}
+
+.admin-index-section {
+	height: 300px;
+	width: 100%;
+	
+	margin-top: 150px;
+	padding-bottom: 130px;
+	
+	display: flex;
+	justify-content: center;
+}
+
+.admin-index-section-row {
+	height: 100%;
+	width: 70%;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.admin-index-section-item {
+	height: 100%;
+	width: 23%;
+	
+	background-color: whitesmoke;
+	
+	box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+  	border-radius: 5px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	
+	text-decoration: none;
+}
+
+.admin-index-section-item:hover {
+	opacity: 0.7;
+}
+
+.admin-index-section-item-icon {
+	max-height: 45%;
+}
+
+.admin-index-section-item-title {
+	font-size: 2rem;
+	font-weight: bold;
+	
+	color: darkgreen;
+}

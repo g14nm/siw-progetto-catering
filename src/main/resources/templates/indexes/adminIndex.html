@@ -3,5 +3,34 @@
 <head th:replace="fragments/base.html :: headerfiles(title='Home')"> </head>
 <body>
 	<nav th:replace="fragments/admin_base.html :: intestazione"></nav>
+	<section class="admin-index-section">
+		<div class="admin-index-section-row">
+			<a class="admin-index-section-item"th:href="@{/admin/buffets}">
+				<img class="admin-index-section-item-icon" th:src="@{/images/buffet-icon.png}">
+				<div class="admin-index-section-item-title">
+					Buffet
+				</div>
+			</a>
+			<a class="admin-index-section-item"th:href="@{/admin/chefs}">
+				<img class="admin-index-section-item-icon" th:src="@{/images/chef-icon.png}">
+				<div class="admin-index-section-item-title">
+					Chef
+				</div>
+			</a>
+			<a class="admin-index-section-item"th:href="@{/admin/piatti}">
+				<img class="admin-index-section-item-icon" th:src="@{/images/piatto-icon.png}">
+				<div class="admin-index-section-item-title">
+					Piatti
+				</div>
+			</a>
+			<a class="admin-index-section-item"th:href="@{/admin/ingredienti}">
+				<img class="admin-index-section-item-icon" th:src="@{/images/ingredienti-icon.png}">
+				<div class="admin-index-section-item-title">
+					Ingredienti
+				</div>
+			</a>
+		</div>
+	</section>
+	<footer><footer>
 </body>
 </html>

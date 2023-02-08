@@ -9,21 +9,11 @@
 </head>
 <body>
 	<header th:fragment="intestazione">
-		<div>
-			<div>
-				<a th:href="@{/login}">Login</a>
-   			</div>
-			<div>
-				<a th:href="@{/register}">Registrati</a>
-   			</div>
-    	</div>
+		<h1>Siw Catering</h1>
+		<nav>
+			Sei un amministratore? <a th:href="@{/login}">Accedi</a>
+    	</nav>
 	</header>
-
-	<p>Go to the next page to see fragments in action</p>
-	<aside>
-		<div>This is a sidebar</div>
-	</aside>
-	<div class="another">This is another sidebar</div>
 	
 	<footer th:fragment="fondo(home)">
 		<a th:href="@{${home}}">Home</a>
