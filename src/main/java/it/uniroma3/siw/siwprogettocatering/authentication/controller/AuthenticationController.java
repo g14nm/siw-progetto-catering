@@ -28,6 +28,16 @@ public class AuthenticationController {
 	@Autowired
 	private CredentialsValidator credentialsValidator;
 	
+	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+	public String index(Model model) {
+			return "indexes/index";
+	}
+	
+	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
+	public String adminIndex(Model model) {
+		return "indexes/adminIndex";
+	}
+	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String showRegisterForm (Model model) {
 		model.addAttribute("user", new User());
@@ -42,7 +52,7 @@ public class AuthenticationController {
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model) {
-		return "index";
+		return "redirect:/";
 	}
 	
     @RequestMapping(value = "/default", method = RequestMethod.GET)
@@ -51,9 +61,9 @@ public class AuthenticationController {
     	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "indexes/adminIndex";
+            return "redirect:/admin/home";
         }
-        return "indexes/publicIndex";
+        return "redirect:/";
     }
 	
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
