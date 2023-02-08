@@ -3,28 +3,38 @@
 <head th:replace="fragments/base.html :: headerfiles(title='Chef')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<section th:if="${#lists.isEmpty(chefs)}">
-		<h4>Nessuno chef presente</h4>
-	</section>
-	<section th:unless="${#lists.isEmpty(chefs)}">
-		<h4>Elenco chef</h4>
-		<table>
+	<section class="table-section">
+		<a class="add-item" th:href="@{/admin/chefForm}">
+			<button>
+				<span class="material-icons">add</span>
+				<span>Aggiungi chef</span>
+			</button>
+		</a>
+		<table th:if="${#lists.isEmpty(chefs)}">
+			<h1>Nessuno chef presente</h1>
+		</table>
+		<table th:unless="${#lists.isEmpty(chefs)}">
 			<tr>
-				<th>NOME</th>
-				<th>COGNOME</th>
-				<th>NAZIONALITA'</th>
+				<th>Nome</th>
+				<th>Cognome</th>
+				<th>Nazionalità</th>
+				<th></th>
 			</tr>
 			<tr th:each="chef : ${chefs}">
 				<td th:text="${chef.nome}">Nome</td>
 				<td th:text="${chef.cognome}">Cognome</td>
-				<td th:text="${chef.nazionalita}">Nazionalita</td>
-				<td><a th:href="@{'/admin/edit/chef/' + ${chef.id}}">Modifica</a></td>
-				<td><a th:href="@{'/admin/delete/chef/' + ${chef.id}}">Rimuovi</a></td>
+				<td th:text="${chef.nazionalita}">Nazionalità</td>
+				<td>
+					<a th:href="@{'/admin/edit/chef/' + ${chef.id}}">
+						<button class="button-edit">Modifica</button>
+					</a>
+					<a th:href="@{'/admin/delete/chef/' + ${chef.id}}">
+						<button class="button-remove">Rimuovi</button>
+					</a>
+				</td>
 			</tr>
 		</table>
 	</section>
-	<section>
-		<a th:href="@{/admin/chefForm}">Aggiungi chef</a>
-	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

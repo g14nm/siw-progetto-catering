@@ -3,28 +3,39 @@
 <head th:replace="fragments/base.html :: headerfiles(title='Buffet')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<section>
-		<a th:href="@{/admin/buffetForm}">Aggiungi buffet</a>
-	</section>
-	<section th:if="${#lists.isEmpty(buffets)}">
-		<h4>Nessun buffet presente</h4>
-	</section>
-	<section class"buffets-section" th:unless="${#lists.isEmpty(buffets)}">
-		<table>
+	<section class="table-section">
+		<a class="add-item" th:href="@{/admin/buffetForm}">
+			<button>
+				<span class="material-icons">add</span>
+				<span>Aggiungi buffet</span>
+			</button>
+		</a>
+		<table th:if="${#lists.isEmpty(buffets)}">
+			<h1>Nessun buffet presente</h1>
+		</table>
+		<table th:unless="${#lists.isEmpty(buffets)}">
 			<tr>
-				<th>NOME</th>
-				<th>DESCRIZIONE</th>
-				<th>CHEF</th>
+				<th>Nome</th>
+				<th>Descrizione</th>
+				<th>Chef</th>
+				<th><th>
 			</tr>
 			<tr th:each="buffet : ${buffets}">
 				<td th:text="${buffet.nome}">Nome</td>
 				<td th:text="${buffet.descrizione}">Descrizione</td>
 				<td th:if="${buffet.chef}" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}">Chef</td>
 				<td th:unless="${buffet.chef}"></td>
-				<td><a th:href="@{'/admin/edit/buffet/' + ${buffet.id}}">Modifica</a></td>
-				<td><a th:href="@{'/admin/delete/buffet/' + ${buffet.id}}">Rimuovi</a></td>
+				<td>
+					<a th:href="@{'/admin/edit/buffet/' + ${buffet.id}}">
+						<button class="button-edit">Modifica</button>
+					</a>
+					<a th:href="@{'/admin/delete/buffet/' + ${buffet.id}}">
+						<button class="button-remove">Rimuovi</button>
+					</a>
+				</td>
 			</tr>
 		</table>
 	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

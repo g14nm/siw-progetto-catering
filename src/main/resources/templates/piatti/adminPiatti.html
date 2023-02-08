@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='Piatto')"> </head>
+<head th:replace="fragments/base.html :: headerfiles(title='Piatti')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<section th:if="${#lists.isEmpty(piatti)}">
-		<h4>Nessun piatto presente</h4>
-	</section>
-	<section th:unless="${#lists.isEmpty(piatti)}">
-		<h4>Elenco piatti</h4>
-		<table>
+	<section class="table-section">
+		<a class="add-item" th:href="@{/admin/piattoForm}">
+			<button>
+				<span class="material-icons">add</span>
+				<span>Aggiungi piatto</span>
+			</button>
+		</a>
+		<table th:if="${#lists.isEmpty(piatti)}">
+			<h1>Nessun piatto presente</h1>
+		</table>
+		<table th:unless="${#lists.isEmpty(piatti)}">
 			<tr>
-				<th>NOME</th>
-				<th>DESCRIZIONE</th>
+				<th>Nome</th>
+				<th>Descrizione</th>
+				<th></th>
 			</tr>
 			<tr th:each="piatto : ${piatti}">
 				<td th:text="${piatto.nome}">Nome</td>
 				<td th:text="${piatto.descrizione}">Descrizione</td>
-				<td><a th:href="@{'/admin/edit/piatto/' + ${piatto.id}}">Modifica</a></td>
-				<td><a th:href="@{'/admin/delete/piatto/' + ${piatto.id}}">Rimuovi</a></td>
+				<td>
+					<a th:href="@{'/admin/edit/piatto/' + ${piatto.id}}">
+						<button class="button-edit">Modifica</button>
+					</a>
+					<a th:href="@{'/admin/delete/piatto/' + ${piatto.id}}">
+						<button class="button-remove">Rimuovi</button>
+					</a>
+				</td>
 			</tr>
 		</table>
 	</section>
-	<section>
-		<a th:href="@{/admin/piattoForm}">Aggiungi piatto</a>
-	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

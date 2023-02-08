@@ -3,28 +3,38 @@
 <head th:replace="fragments/base.html :: headerfiles(title='Ingredienti')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<section th:if="${#lists.isEmpty(ingredienti)}">
-		<h4>Nessun ingrediente presente</h4>
-	</section>
-	<section th:unless="${#lists.isEmpty(ingredienti)}">
-		<h4>Elenco ingrediente</h4>
-		<table>
+	<section class="table-section">
+		<a class="add-item" th:href="@{/admin/ingredienteForm}">
+			<button>
+				<span class="material-icons">add</span>
+				<span>Aggiungi ingrediente</span>
+			</button>
+		</a>
+		<table th:if="${#lists.isEmpty(ingredienti)}">
+			<h1>Nessun ingrediente presente</h1>
+		</table>
+		<table th:unless="${#lists.isEmpty(ingredienti)}">
 			<tr>
-				<th>NOME</th>
-				<th>ORIGINE</th>
-				<th>DESCRIZIONE</th>
+				<th>Nome</th>
+				<th>Origine</th>
+				<th>Descrizione</th>
+				<th></th>
 			</tr>
 			<tr th:each="ingrediente : ${ingredienti}">
 				<td th:text="${ingrediente.nome}">Nome</td>
 				<td th:text="${ingrediente.origine}">Origine</td>
 				<td th:text="${ingrediente.descrizione}">Descrizione</td>
-				<td><a th:href="@{'/admin/edit/ingrediente/' + ${ingrediente.id}}">Modifica</a></td>
-				<td><a th:href="@{'/admin/delete/ingrediente/' + ${ingrediente.id}}">Rimuovi</a></td>
+				<td>
+					<a th:href="@{'/admin/edit/ingrediente/' + ${ingrediente.id}}">
+						<button class="button-edit">Modifica</button>
+					</a>
+					<a th:href="@{'/admin/delete/ingrediente/' + ${ingrediente.id}}">
+						<button class="button-remove">Rimuovi</button>
+					</a>
+				</td>
 			</tr>
 		</table>
 	</section>
-	<section>
-		<a th:href="@{/admin/ingredienteForm}">Aggiungi ingrediente</a>
-	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

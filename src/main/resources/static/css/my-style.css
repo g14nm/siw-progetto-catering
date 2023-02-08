@@ -45,12 +45,16 @@ footer {
 	width: 100%;
 	
 	background-color: #EFECEC;
-	color: darkgrey;
+	color: black;
 	
 	margin-top: 50px;
 	
 	position: absolute;
 	bottom: 0;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .center-form {
@@ -250,4 +254,93 @@ input:focus {
 	font-weight: bold;
 	
 	color: darkgreen;
+}
+
+.table-section {
+	width: 100%;
+	
+	padding-bottom: 130px;
+	margin-top: 50px;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.add-item {
+	height: 50px;
+	width: 170px;
+	
+	text-decoration: none;
+}
+
+.add-item button {
+	height: 100%;
+	width: 100%;
+	border: 0;
+	border-radius: 5px;
+	background-color: darkgreen;
+	color: white;
+	font-size: 1rem;
+	font-weight: bold;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.table-section table {
+	width: 60%;
+	min-width: 540px;
+	
+	margin-top: 50px;
+	
+	border-collapse: collapse;
+}
+
+.table-section table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.table-section table th {
+	height: 50px;
+
+	font-size: 1.3rem;
+	
+	background-color: darkgreen;
+	color: white;
+}
+
+.table-section table td {
+	height: 50px;
+	
+	font-size: 1.1rem;
+	
+	text-align: center;
+}
+
+.table-section table td a {
+	height: 100%;
+	width: 100%;
+	
+	text-decoration: none;
+}
+
+.table-section table td a button {
+	height: 70%;
+	border: 0;
+	border-radius: 5px;
+	color: white;
+	font-size: 1rem;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.button-edit {
+	background-color: navy;
+}
+
+.button-remove {
+	background-color: maroon;
 }
