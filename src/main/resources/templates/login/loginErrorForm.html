@@ -3,6 +3,7 @@
 <head th:replace="fragments/base.html :: headerfiles(title='Login')"> </head>
 <body>
 	<header><h1>Siw Catering</h1></header>
+	<h3 style="color:red; text-align:center; margin-top: 50px;">Username e/o password non validi</h3>
 	<section class="center-form">
 		<form th:action="@{/login}" method="POST">
 			<div class="form-row">Accedi</div>
