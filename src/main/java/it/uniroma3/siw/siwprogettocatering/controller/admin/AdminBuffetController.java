@@ -87,6 +87,7 @@ public class AdminBuffetController {
 			buffet.setNome(newBuffet.getNome());
 			buffet.setDescrizione(newBuffet.getDescrizione());
 			buffet.setChef(newBuffet.getChef());
+			buffet.removeFromPiatti();
 			buffet.setPiatti(newBuffet.getPiatti());
 			this.buffetService.save(buffet);
 			if(!multipartFile.isEmpty()) FileUploadUtil.saveFile(UPLOAD_DIRECTORY, buffet.getId().toString(), multipartFile);

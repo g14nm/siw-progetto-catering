@@ -78,6 +78,7 @@ public class AdminPiattoController {
 		if(!bindingResult.hasErrors()) {
 			piatto.setNome(newPiatto.getNome());
 			piatto.setDescrizione(newPiatto.getDescrizione());
+			piatto.removeFromIngredienti();
 			piatto.setIngredienti(newPiatto.getIngredienti());
 			this.piattoService.save(piatto);
 			if(!multipartFile.isEmpty()) FileUploadUtil.saveFile(UPLOAD_DIRECTORY, piatto.getId().toString(), multipartFile);
