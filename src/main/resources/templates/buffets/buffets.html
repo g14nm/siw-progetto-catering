@@ -2,29 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/base.html :: headerfiles(title='Buffet')"> </head>
 <body>
-	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<section th:if="${#lists.isEmpty(buffets)}">
-		<h4>Nessun buffet presente</h4>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<h1 style="margin-top: 50px; text-align: center; color: darkgreen;">Buffet</h1>
+	<section class="list-section">
+		<div th:if="${#lists.isEmpty(buffets)}">
+			<h1>Nessun buffet presente</h1>
+		</div>
+		<div style="width: 100%;" th:unless="${#lists.isEmpty(buffets)}">	
+			<div class="list-item-container" th:each="buffet : ${buffets}">
+				<a class="list-item" th:href="@{'/buffets/' + ${buffet.id}}">
+					<div class="list-item-image">
+						<img th:src="@{'/foto/buffet/' + ${buffet.id}}" alt="Errore caricamento immagine :(">
+					</div>
+					<div class="list-item-details">
+						<div style="max-height: 20%; margin-bottom: 30px;" class="list-item-details-row">
+							<div class="list-item-name" th:text="${buffet.nome}">Nome</div>
+						</div>
+						<div style="max-height: 50%;" th:if="${not #strings.isEmpty(buffet.descrizione)}" class="list-item-details-row">
+							<div class="list-item-details-title">Descrizione:</div>
+							<div style="margin-left: 5px;" th:text="${buffet.descrizione}">Descrizione</div>
+						</div>
+						<div style="max-height: 20%;" class="list-item-details-row">
+							<div class="list-item-details-title">Chef:</div>
+							<div th:if="${buffet.chef}" style="margin-left: 5px;" th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}">Chef</div>
+							<div th:unless="${buffet.chef}" style="margin-left: 5px;">DA DEFINIRE</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
 	</section>
-	<section th:unless="${#lists.isEmpty(buffets)}">
-		<h4>Elenco buffet</h4>
-		<table>
-			<tr>
-				<th>NOME</th>
-				<th>DESCRIZIONE</th>
-				<th>CHEF</th>
-			</tr>
-			<tr th:each="buffet : ${buffets}">
-				<td th:text="${buffet.nome}">Nome</td>
-				<td th:text="${buffet.descrizione}">Descrizione</td>
-				<td th:text="${buffet.chef.nome}">Chef</td>
-				<td><a th:href="@{'/admin/edit/buffet/' + ${buffet.id}}">Modifica</a></td>
-				<td><a th:href="@{'/admin/delete/buffet/' + ${buffet.id}}">Rimuovi</a></td>
-			</tr>
-		</table>
-	</section>
-	<section>
-		<a th:href="@{/admin/buffetForm}">Aggiungi buffet</a>
-	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

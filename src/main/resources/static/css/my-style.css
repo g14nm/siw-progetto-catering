@@ -343,6 +343,7 @@ input:focus {
 
 .table-section table td {
 	height: 50px;
+	max-width: 200px;
 	
 	font-size: 1.1rem;
 	
@@ -357,7 +358,7 @@ input:focus {
 }
 
 .table-section table td a button {
-	height: 70%;
+	height: 35px;
 	border: 0;
 	border-radius: 5px;
 	color: white;
@@ -527,4 +528,105 @@ select:focus {
 	font-size: 1rem;
 	font-weight: bold;
 	cursor: pointer;
+}
+
+.list-section {
+	width: 100%;
+	
+	padding-bottom: 130px;
+	margin-top: 50px;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.list-item-container {
+	width: 100%;
+	
+	display: flex;
+	justify-content: center;
+}
+
+@media only screen and (max-width: 900px) {
+	.list-item {
+		height: 300px;
+		width: 95%;
+	
+		border-width: 2px 0px 0px 0px;
+		border-style: solid;
+		border-color: lightgrey;
+	
+		display: flex;
+		justify-content: center;
+		justify-content: space-between;
+		align-items: center;
+	
+		text-decoration: none;
+	}
+}
+
+@media only screen and (min-width: 900px) {
+	.list-item {
+		height: 300px;
+		width: 60%;
+	
+		border-width: 2px 0px 0px 0px;
+		border-style: solid;
+		border-color: lightgrey;
+	
+		display: flex;
+		justify-content: center;
+		justify-content: space-between;
+		align-items: center;
+	
+		text-decoration: none;
+	}
+}
+
+.list-item:hover {
+	opacity: 0.7;
+}
+
+.list-item-image {
+	height: 90%;
+	width: 45%;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.list-item-image img {
+	max-height: 100%;
+	max-width: 100%;
+}
+
+.list-item-details {
+	height: 90%;
+	width: 45%;
+	
+	color: black;
+	
+	font-size: 1.1rem;
+	
+	display: flex;
+	flex-direction: column;
+}
+
+.list-item-details-row {
+	margin-bottom: 10px;
+	display: flex;
+	overflow-y: hidden;
+}
+
+.list-item-name {
+	font-size: 1.8rem;
+	font-weight: bold;
+}
+
+.list-item-details-title {
+	font-weight: bold;
+	color: darkgreen;
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Piatti')"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<h1 style="margin-top: 50px; text-align: center; color: darkgreen;">Piatti</h1>
+	<section class="list-section">
+		<div th:if="${#lists.isEmpty(piatti)}">
+			<h1>Nessun piatto presente</h1>
+		</div>
+		<div style="width: 100%;" th:unless="${#lists.isEmpty(piatti)}">	
+			<div class="list-item-container" th:each="piatto : ${piatti}">
+				<a class="list-item" th:href="@{'/piatti/' + ${piatto.id}}">
+					<div class="list-item-image">
+						<img th:src="@{'/foto/piatti/' + ${piatto.id}}" alt="Errore caricamento immagine :(">
+					</div>
+					<div class="list-item-details">
+						<div style="max-height: 20%; margin-bottom: 30px;" class="list-item-details-row">
+							<div class="list-item-name" th:text="${piatto.nome}">Nome</div>
+						</div>
+						<div style="max-height: 70%;" class="list-item-details-row">
+							<div class="list-item-details-title">Descrizione:</div>
+							<div style="margin-left: 5px;" th:text="${piatto.descrizione}">Descrizione</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>
