@@ -618,15 +618,67 @@ select:focus {
 .list-item-details-row {
 	margin-bottom: 10px;
 	display: flex;
-	overflow-y: hidden;
+	overflow: auto;
 }
 
 .list-item-name {
-	font-size: 1.8rem;
+	font-size: 1.5rem;
 	font-weight: bold;
 }
 
 .list-item-details-title {
+	font-weight: bold;
+	color: darkgreen;
+}
+
+.complete-item-section {
+	width: 100%;
+	
+	margin-top: 50px;
+	padding-bottom: 130px;
+	
+	font-size: 1.2rem;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.complete-item-section > * {
+	max-width: 90%;
+}
+
+.complete-item-name {
+	font-size: 2rem;
+	font-weight: bold;
+}
+
+.complete-item-image {
+	height: 400px;
+	width: 100%;
+	
+	margin-top: 50px;
+
+	display: flex;
+	justify-content: center;
+	
+}
+
+.complete-item-image img {
+	max-height: 100%;
+	max-width: 100%;
+	
+	border: 3px solid;
+	border-radius: 5px;
+	border-color: darkgreen;
+	padding: 5px;
+}
+
+.complete-item-details > * {
+	margin-top: 50px;
+}
+
+.complete-item-descriptor {
 	font-weight: bold;
 	color: darkgreen;
 }

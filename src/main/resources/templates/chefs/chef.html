@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Chef details')"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<section class="complete-item-section">
+		<div class="complete-item-name" th:text="${chef.nome} + ' ' + ${chef.cognome}">Nome chef</div>
+		<div class="complete-item-image">
+			<img th:src="@{'/foto/chef/' + ${chef.id}}" alt="errore caricamento immagine :(">
+		</div>
+		<div class="complete-item-details">
+			<div>
+				<span class="complete-item-descriptor">Nazionalità:</span>
+				<span th:text="${chef.nazionalita}">Italia</span>
+			</div>
+			<div th:if="${not #lists.isEmpty(chef.buffets)}">
+				<div class="complete-item-descriptor">Buffet:</div>
+				<div th:each="buffet : ${chef.buffets}" th:text="'- ' + ${buffet.nome}">Buffet</div>	
+			</div>
+		</div>
+	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>

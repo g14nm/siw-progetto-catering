@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: headerfiles(title='Piatto details')"> </head>
+<body>
+	<header th:replace="fragments/base.html :: intestazione"></header>
+	<section class="complete-item-section">
+		<div class="complete-item-name" th:text="${piatto.nome}">Nome piatto</div>
+		<div class="complete-item-image">
+			<img th:src="@{'/foto/piatti/' + ${piatto.id}}" alt="errore caricamento immagine :(">
+		</div>
+		<div class="complete-item-details">
+			<div>
+				<span class="complete-item-descriptor">Descrizione:</span>
+				<span th:text="${piatto.descrizione}">Descrizione</span>
+			</div>
+			<div>
+				<div class="complete-item-descriptor">Ingredienti:</div>
+				<div th:each="ingrediente : ${piatto.ingredienti}" th:text="'- ' + ${ingrediente.nome}"></div>	
+			</div>
+			<div th:if="${not #lists.isEmpty(piatto.buffets)}">
+				<div class="complete-item-descriptor">Buffet:</div>
+				<div th:each="buffet : ${piatto.buffets}" th:text="'- ' + ${buffet.nome}"></div>	
+			</div>
+		</div>
+	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
+</body>
+</html>
