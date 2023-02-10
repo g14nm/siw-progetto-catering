@@ -5,7 +5,7 @@
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
 	<h1 style="margin-top: 50px; text-align: center;">Nuovo chef</h1>
 	<section style="height: 500px;" class="admin-form-section">
-		<form th:action="@{/admin/chef}" method="POST" th:object="${chef}">
+		<form th:action="@{/admin/chef}" method="POST" th:object="${chef}" enctype="multipart/form-data">
 			<label style="height: 20%;" class="admin-form-row" for="nome">
 				<div style="height: 60%" class="admin-form-row-top">
 					<div class="admin-form-row-title">*Nome:</div>
@@ -27,6 +27,12 @@
 				</div>
 				<div style="height: 35%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}" th:style="'color:red'"></div>
 			</label>
+			<div style="height: 9.5%;" class="admin-form-row">
+				<div style="height: 100%" class="admin-form-row-top">
+					<div class="admin-form-row-title">*Foto:</div>
+					<input type="file" name="image" accept="image/png, image/jpeg" required/>
+				</div>
+			</div>
 			<div class="admin-form-row">
 				<div class="admin-form-row-buttons">
 					<button class="button-edit" type="submit">Aggiungi</button>

@@ -1,5 +1,7 @@
 package it.uniroma3.siw.siwprogettocatering.controller.admin;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +12,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.siwprogettocatering.FileUploadUtil;
 import it.uniroma3.siw.siwprogettocatering.controller.validator.ChefValidator;
 import it.uniroma3.siw.siwprogettocatering.model.Chef;
 import it.uniroma3.siw.siwprogettocatering.service.ChefService;
 
 @Controller
 public class AdminChefController {
+	
+	final String UPLOAD_DIRECTORY = "foto/chef/";
 	
 	@Autowired
 	private ChefValidator chefValidator;
@@ -37,10 +44,13 @@ public class AdminChefController {
 	}
 	
 	@PostMapping("/admin/chef")
-	public String saveChef(@Valid @ModelAttribute("chef") Chef chef, BindingResult bindingResult, Model model) {
+	public String saveChef(@RequestParam("image") MultipartFile multipartFile, @Valid @ModelAttribute("chef") Chef chef, BindingResult bindingResult, Model model)
+		throws IOException {
 		this.chefValidator.validate(chef, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			this.chefService.save(chef);
+			Chef savedChef = this.chefService.save(chef);
+			
+			FileUploadUtil.saveFile(UPLOAD_DIRECTORY, savedChef.getId().toString(), multipartFile);
 			return "redirect:/admin/chefs";
 		}
 		return "chefs/chefForm";
@@ -53,7 +63,8 @@ public class AdminChefController {
 	}
 	
 	@PostMapping("/admin/edit/chef/{id}")
-	public String editChef(@PathVariable Long id,@Valid @ModelAttribute("chef") Chef newChef, BindingResult bindingResult) {
+	public String editChef(@RequestParam("image") MultipartFile multipartFile, @PathVariable Long id, @Valid @ModelAttribute("chef") Chef newChef, BindingResult bindingResult, Model model)
+			throws IOException {
 		Chef chef = this.chefService.findById(id);
 		if(!chef.equals(newChef))
 			this.chefValidator.validate(newChef, bindingResult);
@@ -62,6 +73,7 @@ public class AdminChefController {
 			chef.setCognome(newChef.getCognome());
 			chef.setNazionalita(newChef.getNazionalita());
 			this.chefService.save(chef);
+			if(!multipartFile.isEmpty()) FileUploadUtil.saveFile(UPLOAD_DIRECTORY, chef.getId().toString(), multipartFile);
 			return "redirect:/admin/chefs";
 		}
 		return "chefs/editChefForm";
@@ -74,8 +86,9 @@ public class AdminChefController {
 	}
 	
 	@PostMapping("/admin/delete/chef/{id}")
-	public String deleteChef(@PathVariable Long id) {
+	public String deleteChef(@PathVariable Long id, Model model) throws IOException {
 		this.chefService.deleteById(id);
+		FileUploadUtil.deleteFile(UPLOAD_DIRECTORY, id.toString());
 		return "redirect:/admin/chefs";
 	}
 	

@@ -5,7 +5,7 @@
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
 	<h1 style="margin-top: 50px; text-align: center;">Nuovo buffet</h1>
 	<section style="height: 900px;" class="admin-form-section">
-		<form th:action="@{/admin/buffet}" method="POST" th:object="${buffet}">
+		<form th:action="@{/admin/buffet}" method="POST" th:object="${buffet}" enctype="multipart/form-data">
 			<label style="height: 10%;" class="admin-form-row" for="nome">
 				<div style="height: 60%" class="admin-form-row-top">
 					<div class="admin-form-row-title">*Nome:</div>
@@ -13,7 +13,7 @@
 				</div>
 				<div style="height: 35%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></div>
 			</label>
-			<label style="height: 30%;" class="admin-form-row" for="descrizione">
+			<label style="height: 25%;" class="admin-form-row" for="descrizione">
 				<div style="height: 80%" class="admin-form-row-top">
 					<div class="admin-form-row-title">Descrizione:</div>
 					<textarea th:field="*{descrizione}" id="descrizione" type="text" placeholder="255 caratteri max"/>
@@ -22,28 +22,36 @@
 			</label>
 			<label style="height: 10%" class="admin-form-row" for="chef-select">
 				<div style="height: 60%" class="admin-form-row-top">
-					<div class="admin-form-row-title">Chef:</div>
-					<select th:field="*{chef}" id="chef-select">
+					<div class="admin-form-row-title">*Chef:</div>
+					<select th:field="*{chef}" id="chef-select" required>
 						<option value="">-- Seleziona uno chef --</option>
 						<option th:each="chef : ${chefs}" th:value="${chef.id}" th:text="${chef.nome} + ' ' + ${chef.cognome}">Chef</option>
 					</select>
 				</div>
+				<div style="height: 35%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('chef')}" th:errors="*{chef}" th:style="'color:red'"></div>
 			</label>
-			<label style="height: 30%;" class="admin-form-row">
+			<label style="height: 25%;" class="admin-form-row">
 				<div style="height: 80%" class="admin-form-row-top">
-					<div class="admin-form-row-title">Piatti:</div>
+					<div class="admin-form-row-title">*Piatti:</div>
 					<fieldset>
 					    <div th:each="piatto : ${piatti}">
 					    	<input th:field="*{piatti}" id="piatto" type="checkbox" th:value="${piatto.id}">
 					    	<label for="piatto" th:text="${piatto.nome}">Piatto</label>
 					    </div>
 					</fieldset>
-				</div>	
+				</div>
+				<div style="height: 15%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('piatti')}" th:errors="*{piatti}" th:style="'color:red'"></div>
 			</label>
+			<div style="height: 4.5%;" class="admin-form-row">
+				<div style="height: 100%" class="admin-form-row-top">
+					<div class="admin-form-row-title">*Foto:</div>
+					<input type="file" name="image" accept="image/png, image/jpeg" required/>
+				</div>
+			</div>
 			<div class="admin-form-row">
 				<div class="admin-form-row-buttons">
 					<button class="button-edit" type="submit">Aggiungi</button>
-					<a th:href="@{/admin/buffets}"><button class="button-remove"type="button">Annulla</button></a>
+					<a th:href="@{/admin/buffets}"><button class="button-remove" type="button">Annulla</button></a>
 				</div>
 			</div>
 		</form>

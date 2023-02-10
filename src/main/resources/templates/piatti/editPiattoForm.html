@@ -5,7 +5,7 @@
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
 	<h1 style="margin-top: 50px; text-align: center;">Modifica piatto</h1>
 	<section style="height: 700px;" class="admin-form-section">
-		<form th:action="@{'/admin/edit/piatto/' + ${piatto.id}}" method="POST" th:object="${piatto}">
+		<form th:action="@{'/admin/edit/piatto/' + ${piatto.id}}" method="POST" th:object="${piatto}" enctype="multipart/form-data">
 			<label style="height: 13%;" class="admin-form-row" for="nome">
 				<div style="height: 60%" class="admin-form-row-top">
 					<div class="admin-form-row-title">*Nome:</div>
@@ -13,28 +13,35 @@
 				</div>
 				<div style="height: 35%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></div>
 			</label>
-			<label style="height: 30%;" class="admin-form-row" for="descrizione">
+			<label style="height: 28%;" class="admin-form-row" for="descrizione">
 				<div style="height: 80%" class="admin-form-row-top">
 					<div class="admin-form-row-title">*Descrizione:</div>
 					<textarea th:field="*{descrizione}" id="descrizione" type="text" placeholder="255 caratteri max" required/>
 				</div>
 				<div style="height: 15%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" th:style="'color:red'"></div>
 			</label>
-			<label style="height: 30%;" class="admin-form-row">
+			<label style="height: 28%;" class="admin-form-row">
 				<div style="height: 80%" class="admin-form-row-top">
-					<div class="admin-form-row-title">Ingredienti:</div>
+					<div class="admin-form-row-title">*Ingredienti:</div>
 					<fieldset>
 					    <div th:each="ingrediente : ${ingredienti}">
 					    	<input th:field="*{ingredienti}" id="ingrediente" type="checkbox" th:value="${ingrediente.id}">
 					    	<label for="ingrediente" th:text="${ingrediente.nome}">Piatto</label>
 					    </div>
 					</fieldset>
-				</div>	
+				</div>
+				<div style="height: 15%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('ingredienti')}" th:errors="*{ingredienti}" th:style="'color:red'"></div>
 			</label>
+			<div style="height: 6%;" class="admin-form-row">
+				<div style="height: 100%" class="admin-form-row-top">
+					<div class="admin-form-row-title">Foto:</div>
+					<input type="file" name="image" accept="image/png, image/jpeg"/>
+				</div>
+			</div>
 			<div class="admin-form-row">
 				<div class="admin-form-row-buttons">
 					<button class="button-edit" type="submit">Conferma</button>
-					<a th:href="@{/admin/piatti}"><button class="button-remove"type="button">Annulla</button></a>
+					<a th:href="@{/admin/piatti}"><button class="button-remove" type="button">Annulla</button></a>
 				</div>
 			</div>
 		</form>
