@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Buffet {
@@ -24,9 +26,11 @@ public class Buffet {
 	
 	private String descrizione;
 	
+	@NotEmpty
 	@ManyToMany(mappedBy = "buffets")
 	private Set<Piatto> piatti;
 	
+	@NotNull
 	@ManyToOne
 	private Chef chef;
 	

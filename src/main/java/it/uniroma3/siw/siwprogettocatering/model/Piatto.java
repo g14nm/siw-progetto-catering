@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Piatto {
@@ -24,6 +25,7 @@ public class Piatto {
 	@NotBlank
 	private String descrizione;
 	
+	@NotEmpty
 	@ManyToMany(mappedBy = "piatti")
 	private Set<Ingrediente> ingredienti;
 	
