@@ -1,26 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='Confirm deletion of piatto')"> </head>
+<head th:replace="fragments/base.html :: headerfiles(title='Delete piatto')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<div>
-		<h4 th:text="@{'Confermi rimozione di piatto: ' + ${piatto.id} + '?'}">Conferma rimozione di piatto</h4>
-	</div>
-	<form th:action="@{'/admin/delete/piatto/' + ${piatto.id}}" method="POST">
-		<section>
-			<h5>Dati del piatto: </h5>
-			<ul>
-				<li th:text="'Nome: ' + ${piatto.nome}">Nome</li>
-				<li th:text="'Descrizione: ' + ${piatto.descrizione}">Descrizione</li>
-				<ul>Ingredienti: 
-					<li th:each="ingrediente : *{piatto.ingredienti}" th:text="${ingrediente.nome}">Ingrediente</li>
-				</ul>
-			</ul>		
-		</section>
-		<div>
-				<span><button type="submit">Conferma</button></span>
-				<span><a th:href="@{/admin/piatti}"><button type="button">Annulla</button></a></span>
+	<form class="complete-item-section" th:action="@{'/admin/delete/piatto/' + ${piatto.id}}" method="POST">
+		<div class="complete-item-details">
+			<div th:if="${not #lists.isEmpty(piatto.buffets)}" style="font-size: 1.5rem; font-weight: bold; color: red;">
+				Attenzione! Il piatto ha dei buffet associati. Assicurarsi che i buffet non rimangano vuoti dopo la rimozione
+			</div>
+			<div style="font-size: 1.5rem; font-weight: bold;" th:text="@{'Confermi rimozione di piatto: ' + ${piatto.nome} + '?'}">Conferma rimozione di piatto</div>
+			<div>
+				<span class="complete-item-descriptor">Descrizione:</span>
+				<span th:text="${piatto.descrizione}">Descrizione</span>
+			</div>
+			<div>
+				<div class="complete-item-descriptor">Ingredienti:</div>
+				<div th:each="ingrediente : ${piatto.ingredienti}" th:text="'- ' + ${ingrediente.nome}"></div>	
+			</div>
+			<div th:if="${not #lists.isEmpty(piatto.buffets)}">
+				<div class="complete-item-descriptor">Buffet:</div>
+				<div th:each="buffet : ${piatto.buffets}" th:text="'- ' + ${buffet.nome}"></div>	
+			</div>
+			<div class="admin-form-row-buttons">
+				<button class="button-edit" type="submit">Rimuovi</button>
+				<a th:href="@{/admin/piatti}"><button class="button-remove" type="button">Annulla</button></a>
+			</div>
 		</div>
 	</form>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

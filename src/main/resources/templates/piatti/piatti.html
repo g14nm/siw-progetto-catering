@@ -15,12 +15,12 @@
 						<img th:src="@{'/foto/piatti/' + ${piatto.id}}" alt="Errore caricamento immagine :(">
 					</div>
 					<div class="list-item-details">
-						<div style="max-height: 20%; margin-bottom: 30px;" class="list-item-details-row">
+						<div style="max-height: 40%; margin-bottom: 30px;" class="list-item-details-row">
 							<div class="list-item-name" th:text="${piatto.nome}">Nome</div>
 						</div>
-						<div style="max-height: 70%;" class="list-item-details-row">
+						<div style="max-height: 50%;" class="list-item-details-row">
 							<div class="list-item-details-title">Descrizione:</div>
-							<div style="margin-left: 5px;" th:text="${piatto.descrizione}">Descrizione</div>
+							<div style="margin-left: 5px; text-overflow: ellipsis;" th:text="${piatto.descrizione}">Descrizione</div>
 						</div>
 					</div>
 				</a>

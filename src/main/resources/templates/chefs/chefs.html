@@ -15,10 +15,10 @@
 						<img th:src="@{'/foto/chef/' + ${chef.id}}" alt="Errore caricamento immagine :(">
 					</div>
 					<div class="list-item-details">
-						<div style="max-height: 20%; margin-bottom: 30px;" class="list-item-details-row">
+						<div style="max-height: 45%; margin-bottom: 30px;" class="list-item-details-row">
 							<div class="list-item-name" th:text="${chef.nome} + ' ' + ${chef.cognome}">Nome</div>
 						</div>
-						<div style="max-height: 70%;" th:if="${chef.nazionalita}" class="list-item-details-row">
+						<div style="max-height: 45%;" th:if="${chef.nazionalita}" class="list-item-details-row">
 							<div class="list-item-details-title">Nazionalità:</div>
 							<div style="margin-left: 5px;" th:text="${chef.nazionalita}">Nazionalità</div>
 						</div>

@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='Confirm deletion of ingrediente')"> </head>
+<head th:replace="fragments/base.html :: headerfiles(title='Delete ingrediente')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<div>
-		<h4 th:text="@{'Confermi rimozione di ingrediente: ' + ${ingrediente.id} + '?'}">Conferma rimozione di ingrediente</h4>
-	</div>
-	<form th:action="@{'/admin/delete/ingrediente/' + ${ingrediente.id}}" method="POST">
-		<section>
-			<h5>Dati dello ingrediente: </h5>
-			<ul>
-				<li th:text="'Nome: ' + ${ingrediente.nome}">Nome</li>
-				<li th:text="'Origine: ' + ${ingrediente.origine}">Origine</li>
-				<li th:text="'Descrizione: ' + ${ingrediente.descrizione}">Descrizione</li>
-			</ul>		
-		</section>
-		<div>
-				<span><button type="submit">Conferma</button></span>
-				<span><a th:href="@{/admin/ingredienti}"><button type="button">Annulla</button></a></span>
+	<form class="complete-item-section" th:action="@{'/admin/delete/ingrediente/' + ${ingrediente.id}}" method="POST">
+		<div class="complete-item-details">
+			<div th:if="${not #lists.isEmpty(ingrediente.piatti)}" style="font-size: 1.5rem; font-weight: bold; color: red;">
+				Attenzione! L'ingrediente ha dei piatti associati.
+			</div>
+			<div style="font-size: 1.5rem; font-weight: bold;" th:text="@{'Confermi rimozione di ingrediente: ' + ${ingrediente.nome} + '?'}">Conferma rimozione di ingrediente</div>
+			<div if th:if="${not #strings.isEmpty(ingrediente.descrizione)}">
+				<span class="complete-item-descriptor">Descrizione:</span>
+				<span th:text="${ingrediente.descrizione}">Descrizione</span>
+			</div>
+			<div>
+				<span class="complete-item-descriptor">Origine:</span>
+				<span th:text="${ingrediente.origine}">Origine</span>
+			</div>
+			<div class="admin-form-row-buttons">
+				<button class="button-edit" type="submit">Rimuovi</button>
+				<a th:href="@{/admin/ingredienti}"><button class="button-remove" type="button">Annulla</button></a>
+			</div>
 		</div>
 	</form>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

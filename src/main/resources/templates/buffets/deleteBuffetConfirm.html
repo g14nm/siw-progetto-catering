@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='Confirm deletion of buffet')"> </head>
+<head th:replace="fragments/base.html :: headerfiles(title='Delete buffet')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<div>
-		<h4 th:text="@{'Confermi rimozione di buffet: ' + ${buffet.id} + '?'}">Conferma rimozione di buffet</h4>
-	</div>
-	<form th:action="@{'/admin/delete/buffet/' + ${buffet.id}}" method="POST">
-		<section>
-			<h5>Dati del buffet: </h5>
-			<ul>
-				<li th:text="'Nome: ' + ${buffet.nome}">Nome</li>
-				<li th:text="'Descrizione: ' + ${buffet.descrizione}">Descrizione</li>
-				<li th:text="'Chef: ' + ${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}">Chef</li>
-				<ul>Piatti: 
-					<li th:each="piatto : *{buffet.piatti}" th:text="${piatto.nome}">Piatto</li>
-				</ul>
-			</ul>		
-		</section>
-		<div>
-				<span><button type="submit">Conferma</button></span>
-				<span><a th:href="@{/admin/buffets}"><button type="button">Annulla</button></a></span>
+	<form class="complete-item-section" th:action="@{'/admin/delete/buffet/' + ${buffet.id}}" method="POST">
+		<div class="complete-item-details">
+			<div class="complete-item-name" th:text="@{'Confermi rimozione di buffet: ' + ${buffet.nome} + '?'}">Conferma rimozione di buffet</div>
+			<div th:if="${not #strings.isEmpty(buffet.descrizione)}">
+				<span class="complete-item-descriptor">Descrizione:</span>
+				<span th:text="${buffet.descrizione}">Descrizione</span>
+			</div>
+			<div>
+				<span class="complete-item-descriptor">Chef:</span>
+				<span th:text="${buffet.chef.nome} + ' ' + ${buffet.chef.cognome}">Mario Rossi</span>
+			</div>
+			<div>
+				<div class="complete-item-descriptor">Piatti:</div>
+				<div th:each="piatto : ${buffet.piatti}" th:text="'- ' + ${piatto.nome}"></div>			
+			</div>
+			<div class="admin-form-row-buttons">
+				<button class="button-edit" type="submit">Rimuovi</button>
+				<a th:href="@{/admin/buffets}"><button class="button-remove" type="button">Annulla</button></a>
+			</div>
 		</div>
 	</form>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

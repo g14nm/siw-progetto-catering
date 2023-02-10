@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/base.html :: headerfiles(title='Confirm deletion of chef')"> </head>
+<head th:replace="fragments/base.html :: headerfiles(title='Delete chef')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<div>
-		<h4 th:text="@{'Confermi rimozione di chef: ' + ${chef.nome} + ' ' + ${chef.cognome} + '?'}">Conferma rimozione di chef</h4>
-		<h4 th:if="${not #sets.isEmpty(chef.buffets)}" th:style="'color:red'">Lo chef ha dei buffet associati. Assicurarsi di modificare lo chef nei buffet dopo la rimozione</h4>
-	</div>
-	<form th:action="@{'/admin/delete/chef/' + ${chef.id}}" method="POST">
-		<section>
-			<h5>Dati dello chef: </h5>
-			<ul>
-				<li th:text="'Nome: ' + ${chef.nome}">Nome</li>
-				<li th:text="'Cognome: ' + ${chef.cognome}">Cognome</li>
-				<li th:text="'Nazionalità: ' + ${chef.nazionalita}">Nazionalita</li>
-			</ul>		
-		</section>
-		<div>
-				<span><button type="submit">Conferma</button></span>
-				<span><a th:href="@{/admin/chefs}"><button type="button">Annulla</button></a></span>
+	<form class="complete-item-section" th:action="@{'/admin/delete/chef/' + ${chef.id}}" method="POST">
+		<div class="complete-item-details">
+			<div th:if="${not #lists.isEmpty(chef.buffets)}" style="font-size: 1.5rem; font-weight: bold; color: red;">
+				Attenzione! Lo chef ha dei buffet associati. Assicurarsi di modificare lo chef nei buffet dopo la rimozione
+			</div>
+			<div style="font-size: 1.5rem; font-weight: bold;" th:text="@{'Confermi rimozione di chef: ' + ${chef.nome} + ' ' + ${chef.cognome} + '?'}">Conferma rimozione di chef</div>
+			<div>
+				<span class="complete-item-descriptor">Nazionalità:</span>
+				<span th:text="${chef.nazionalita}">Italia</span>
+			</div>
+			<div th:if="${not #lists.isEmpty(chef.buffets)}">
+				<div class="complete-item-descriptor">Buffet:</div>
+				<div th:each="buffet : ${chef.buffets}" th:text="'- ' + ${buffet.nome}">Buffet</div>	
+			</div>
+			<div class="admin-form-row-buttons">
+				<button class="button-edit" type="submit">Rimuovi</button>
+				<a th:href="@{/admin/chefs}"><button class="button-remove" type="button">Annulla</button></a>
+			</div>
 		</div>
 	</form>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>
