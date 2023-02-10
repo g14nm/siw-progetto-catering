@@ -3,28 +3,38 @@
 <head th:replace="fragments/base.html :: headerfiles(title='Add Chef')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<form th:action="@{/admin/chef}" method="POST" th:object="${chef}">
-		<table>
-			<tr>
-				<td>Nome: </td>
-				<td><input th:field="*{nome}" type="text" required /></td>
-				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></td>
-			</tr>		
-			<tr>
-				<td>Cognome: </td>
-				<td><input th:field="*{cognome}" type="text" required /></td>
-				<td th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" th:style="'color:red'"></td>
-			</tr>
-			<tr>
-				<td>Nazionalità: </td>
-				<td><input th:field="*{nazionalita}" type="text" required /></td>
-				<td th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}" th:style="'color:red'"></td>
-			</tr>
-		</table>
-		<div>
-				<span><button type="submit">Aggiungi</button></span>
-				<span><a th:href="@{/admin/chefs}"><button type="button">Annulla</button></a></span>
-		</div>
-	</form>
+	<h1 style="margin-top: 50px; text-align: center;">Nuovo chef</h1>
+	<section style="height: 500px;" class="admin-form-section">
+		<form th:action="@{/admin/chef}" method="POST" th:object="${chef}">
+			<label style="height: 20%;" class="admin-form-row" for="nome">
+				<div style="height: 60%" class="admin-form-row-top">
+					<div class="admin-form-row-title">*Nome:</div>
+					<input th:field="*{nome}" id="nome" type="text" required/>
+				</div>
+				<div style="height: 35%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></div>
+			</label>
+			<label style="height: 20%;" class="admin-form-row" for="cognome">
+				<div style="height: 60%" class="admin-form-row-top">
+					<div class="admin-form-row-title">*Cognome:</div>
+					<input th:field="*{cognome}" id="cognome" type="text" required/>
+				</div>
+				<div style="height: 35%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" th:style="'color:red'"></div>
+			</label>
+			<label style="height: 20%;" class="admin-form-row" for="nazionalita">
+				<div style="height: 60%" class="admin-form-row-top">
+					<div class="admin-form-row-title">*Nazionalità:</div>
+					<input th:field="*{nazionalita}" id="nazionalita" type="text" required/>
+				</div>
+				<div style="height: 35%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}" th:style="'color:red'"></div>
+			</label>
+			<div class="admin-form-row">
+				<div class="admin-form-row-buttons">
+					<button class="button-edit" type="submit">Aggiungi</button>
+					<a th:href="@{/admin/chefs}"><button class="button-remove"type="button">Annulla</button></a>
+				</div>
+			</div>
+		</form>
+	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

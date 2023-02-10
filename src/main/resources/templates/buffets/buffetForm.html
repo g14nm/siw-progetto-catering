@@ -3,43 +3,51 @@
 <head th:replace="fragments/base.html :: headerfiles(title='Add Buffet')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<form th:action="@{/admin/buffet}" method="POST" th:object="${buffet}">
-		<table>
-			<tr>
-				<td>Nome: </td>
-				<td><input th:field="*{nome}" type="text" required /></td>
-				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></td>
-			</tr>		
-			<tr>
-				<td>Descrizione: </td>
-				<td><input th:field="*{descrizione}" type="text" required /></td>
-				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" th:style="'color:red'"></td>
-			</tr>
-			<tr>
-				<td>Chef: </td>
-				<td>
-					<label for="chef-select"></label>
-						<select th:field="*{chef}" id="chef-select" required>
-						    <option value="">--Seleziona un chef--</option>
-						    <option th:each="chef : ${chefs}" th:value="${chef.id}" th:text="${chef.nome} + ' ' + ${chef.cognome}">Chef</option>
-						</select>	
-				</td>
-			</tr>
-			<tr>
-				<td>Piatti: </td>
-				<td>
-					<label for="piatti-select"></label>
-						<select th:field="*{piatti}" id="piatti-select" multiple required>
-						    <option value="">--Seleziona almeno un piatto--</option>
-						    <option th:each="piatto : ${piatti}" th:value="${piatto.id}" th:text="${piatto.nome}">Piatto</option>
-						</select>	
-				</td>
-			</tr>
-		</table>
-		<div>
-				<span><button type="submit">Aggiungi</button></span>
-				<span><a th:href="@{/admin/buffets}"><button type="button">Annulla</button></a></span>
-		</div>
-	</form>
+	<h1 style="margin-top: 50px; text-align: center;">Nuovo buffet</h1>
+	<section style="height: 900px;" class="admin-form-section">
+		<form th:action="@{/admin/buffet}" method="POST" th:object="${buffet}">
+			<label style="height: 10%;" class="admin-form-row" for="nome">
+				<div style="height: 60%" class="admin-form-row-top">
+					<div class="admin-form-row-title">*Nome:</div>
+					<input th:field="*{nome}" id="nome" type="text" required/>
+				</div>
+				<div style="height: 35%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></div>
+			</label>
+			<label style="height: 30%;" class="admin-form-row" for="descrizione">
+				<div style="height: 80%" class="admin-form-row-top">
+					<div class="admin-form-row-title">Descrizione:</div>
+					<textarea th:field="*{descrizione}" id="descrizione" type="text" placeholder="255 caratteri max"/>
+				</div>
+				<div style="height: 15%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" th:style="'color:red'"></div>
+			</label>
+			<label style="height: 10%" class="admin-form-row" for="chef-select">
+				<div style="height: 60%" class="admin-form-row-top">
+					<div class="admin-form-row-title">Chef:</div>
+					<select th:field="*{chef}" id="chef-select">
+						<option value="">-- Seleziona uno chef --</option>
+						<option th:each="chef : ${chefs}" th:value="${chef.id}" th:text="${chef.nome} + ' ' + ${chef.cognome}">Chef</option>
+					</select>
+				</div>
+			</label>
+			<label style="height: 30%;" class="admin-form-row">
+				<div style="height: 80%" class="admin-form-row-top">
+					<div class="admin-form-row-title">Piatti:</div>
+					<fieldset>
+					    <div th:each="piatto : ${piatti}">
+					    	<input th:field="*{piatti}" id="piatto" type="checkbox" th:value="${piatto.id}">
+					    	<label for="piatto" th:text="${piatto.nome}">Piatto</label>
+					    </div>
+					</fieldset>
+				</div>	
+			</label>
+			<div class="admin-form-row">
+				<div class="admin-form-row-buttons">
+					<button class="button-edit" type="submit">Aggiungi</button>
+					<a th:href="@{/admin/buffets}"><button class="button-remove"type="button">Annulla</button></a>
+				</div>
+			</div>
+		</form>
+	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>

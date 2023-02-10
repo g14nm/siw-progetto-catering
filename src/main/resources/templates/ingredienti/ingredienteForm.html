@@ -3,28 +3,38 @@
 <head th:replace="fragments/base.html :: headerfiles(title='Add Ingrediente')"> </head>
 <body>
 	<header th:replace="fragments/admin_base.html :: intestazione"></header>
-	<form th:action="@{/admin/ingrediente}" method="POST" th:object="${ingrediente}">
-		<table>
-			<tr>
-				<td>Nome: </td>
-				<td><input th:field="*{nome}" type="text" required /></td>
-				<td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></td>
-			</tr>		
-			<tr>
-				<td>Origine: </td>
-				<td><input th:field="*{origine}" type="text" required /></td>
-				<td th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}" th:style="'color:red'"></td>
-			</tr>
-			<tr>
-				<td>Descrizione: </td>
-				<td><input th:field="*{descrizione}" type="text"/></td>
-				<td th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" th:style="'color:red'"></td>
-			</tr>
-		</table>
-		<div>
-				<span><button type="submit">Aggiungi</button></span>
-				<span><a th:href="@{/admin/ingredienti}"><button type="button">Annulla</button></a></span>
-		</div>
-	</form>
+	<h1 style="margin-top: 50px; text-align: center;">Nuovo ingrediente</h1>
+	<section style="height: 500px;" class="admin-form-section">
+		<form th:action="@{/admin/ingrediente}" method="POST" th:object="${ingrediente}">
+			<label style="height: 20%;" class="admin-form-row" for="nome">
+				<div style="height: 60%" class="admin-form-row-top">
+					<div class="admin-form-row-title">*Nome:</div>
+					<input th:field="*{nome}" id="nome" type="text" required/>
+				</div>
+				<div style="height: 35%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red'"></div>
+			</label>
+			<label style="height: 20%;" class="admin-form-row" for="origine">
+				<div style="height: 60%" class="admin-form-row-top">
+					<div class="admin-form-row-title">*Origine:</div>
+					<input th:field="*{origine}" id="origine" type="text" required/>
+				</div>
+				<div style="height: 35%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}" th:style="'color:red'"></div>
+			</label>
+			<label style="height: 30%;" class="admin-form-row" for="descrizione">
+				<div style="height: 80%" class="admin-form-row-top">
+					<div class="admin-form-row-title">Descrizione:</div>
+					<textarea th:field="*{descrizione}" id="descrizione" type="text" placeholder="255 caratteri max"/>
+				</div>
+				<div style="height: 15%" class="admin-form-row-bottom" th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}" th:style="'color:red'"></div>
+			</label>
+			<div class="admin-form-row">
+				<div class="admin-form-row-buttons">
+					<button class="button-edit" type="submit">Aggiungi</button>
+					<a th:href="@{/admin/ingredienti}"><button class="button-remove"type="button">Annulla</button></a>
+				</div>
+			</div>
+		</form>
+	</section>
+	<footer th:replace="fragments/base.html :: fondo"></footer>
 </body>
 </html>
